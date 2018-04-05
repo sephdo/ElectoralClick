@@ -5,7 +5,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-	
+	import_map();
 	retrieve_local();
 	adjust_scoreboard();
 	if(localStorage["split"]==="yes"){
@@ -93,6 +93,16 @@ $(document).ready(function() {
     });
 	
 });
+function import_map(){
+	xhr = new XMLHttpRequest();
+	xhr.open("GET","map.svg",false);
+	// Following line is just to be on the safe side;
+	// not needed if your server delivers SVG with correct MIME type
+	xhr.overrideMimeType("image/svg+xml");
+	xhr.send("");
+	//document.getElementById("svgContainer").appendChild(xhr.responseXML.documentElement);
+	document.body.appendChild(xhr.responseXML.documentElement);
+}
 function adjust_scoreboard(){
 	for(i = 0; i < scoreboard.length; i++){
 		scoreboard[i]["score"]=0
@@ -404,7 +414,8 @@ body{
 	<div id="GOP3" class="partybar"><p></p></div>
 </div>
 </div>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--div id="svgContainer"></div-->
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -560,7 +571,7 @@ body{
      inkscape:current-layer="layer2"
      showguides="false"
      inkscape:snap-text-baseline="true" />
-  <!-- svg generated using QGIS www.qgis.org -->
+  <!-- svg generated using QGIS www.qgis.org>
   <g
      inkscape:groupmode="layer"
      id="layer3"
@@ -2101,8 +2112,8 @@ body{
     </g>
   </g>
   
-  <!-- QGIS extent for clipping, eg in Inkscape -->
-</svg>
+  <!-- QGIS extent for clipping, eg in Inkscape>
+</svg-->
 
 <h1 class="lowernote">Left-click = DEM / Ctrl or Right-click = GOP / Shift-click to toggle GRN-LIB<br><div style="font-size:1vw;color:#4a4a4a">App by Joseph F. Donahue - <a style="font-size:1vw;color:#4a4a4a" href="mailto:josephfdonahue@gmail.com">josephfdonahue@gmail.com</a></div></h1>
 </div>
